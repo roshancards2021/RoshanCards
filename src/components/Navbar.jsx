@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import brandLogo from '../assets/Logo-bgRemoved.png';
+import brandLogo from '/assets/Logo-bgRemoved.png';
 
 const authStorageKey = 'roshanCards.authUser';
 
