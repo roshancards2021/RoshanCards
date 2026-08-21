@@ -29,7 +29,7 @@ function Footer(){
                                 <li><span>Address</span>{loading ? <span>Loading…</span> : address ? <span style={{whiteSpace:'pre-wrap'}}>{address}</span> : <span>—</span>}</li>
                             </ul>
                         </div>
-                        <img src="./src/assets/Brand.png" alt="Img Not Available" className="footer-details-banner" />
+                        <img src="/assets/Brand.png" alt="RoshanCards Brand Image" className="footer-details-banner" />
                     </div>
                 </div>
 
