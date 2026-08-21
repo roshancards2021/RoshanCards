@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /manage-users
+Disallow: /manage-products
+Disallow: /manage-contact-info
+Disallow: /manage-slider-content
+Disallow: /contact-requests
+Disallow: /new-product
+Disallow: /product-details
+
+Sitemap: https://www.roshancards.com/sitemap.xml

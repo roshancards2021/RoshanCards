@@ -1,0 +1,1319 @@
+/* ==========================================================================
+   RoshanCards — media-query.css (mobile-friendly rewrite)
+   Loaded AFTER src/styles/index.css, so anything here overrides it.
+   Breakpoints used: 1024 (tablet), 768 (mobile nav switch — matches the
+   768px check in Navbar.jsx), 600, 480, 380 (small phones).
+   ========================================================================== */
+
+:root {
+  --content-width: min(1180px, calc(100% - 2rem));
+}
+
+/* --------------------------------------------------------------------
+   Safety net — applies everywhere, keeps images/media from ever forcing
+   a horizontal scrollbar on small screens.
+   -------------------------------------------------------------------- */
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------
+   Remove the "stuck hover" effect on touch devices (phones/tablets),
+   where a tapped element stays visually zoomed/highlighted after tap.
+   -------------------------------------------------------------------- */
+@media (hover: none) {
+  .services-content-item:hover,
+  .about-us-content__image:hover,
+  .why-us-content__image:hover,
+  .catalogue-card:hover,
+  .single-product-thumb:hover,
+  .slider-explore:hover,
+  .footer-card a:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   TABLET  (<= 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .site-nav {
+    top: 0.65rem;
+    margin-bottom: -4.8rem;
+    padding: 0 0.9rem;
+  }
+
+  .single-product-image-section {
+    left: 8%;
+    top: 0;
+    width: min(40vw, 42rem);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .single-product-image-wrap {
+    width: 100%;
+    height: min(40vh, calc(100vh - 14rem));
+    max-height: 70vh;
+    aspect-ratio: auto;
+  }
+
+  .single-product-image {
+    height: 100%;
+  }
+
+  .single-product-thumbnails {
+    top: -12%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .single-product-arrows {
+    width: 130%;
+    left: -15%;
+    padding: 0 0.25rem;
+  }
+
+  .site-nav__shell {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .site-nav__inner {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.8rem 1rem;
+    gap: 0.75rem;
+  }
+
+  /* Slider */
+  .slider,
+  .sliderMask {
+    height: 80vh;
+  }
+  
+  .site-nav{
+    margin-top: -.6rem;
+  }
+
+  /* Catalogue */
+  .catalogue-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .catalogue-search {
+    justify-items: stretch;
+    width: 400%;
+  }
+
+  .catalogue-toolbar {
+    grid-template-columns: minmax(13rem, auto) minmax(0, 1fr);
+    align-items: end;
+  }
+
+  .catalogue-hero .catalogue-toolbar__category {
+    position: static;
+    left: auto;
+    top: auto;
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .catalogue-search__label {
+    position: static;
+    left: auto !important;
+    text-align: left;
+  }
+
+  .catalogue-search input {
+    position: static;
+    left: auto !important;
+    width: 100% !important;
+  }
+
+  .catalogue-category-button {
+    top: 0;
+    left: 0;
+    margin-top: 2rem;
+  }
+
+  /* About / Why-us / Services — switch from the fragile absolute-position
+     overlay layout to a clean stacked flow so nothing overlaps.
+     `order` forces the visual order to always be "text -> image -> icons"
+     no matter what order they appear in the JSX (Services.jsx puts the
+     banner image before the text in the markup, for example), and
+     `display:flex; flex-direction:column` on the container makes every
+     child a plain block that simply stacks — nothing can sit on top of
+     anything else any more. */
+  .about-us-container,
+  .why-us-container,
+  .services-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-us-hero,
+  .why-us-hero,
+  .services-hero {
+    order: 1;
+    position: static;
+    left: auto;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-us-hero p,
+  .why-us-hero p,
+  .services-hero p {
+    width: auto;
+    max-width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .services-hero {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .why-us-hero h1 {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .about-us-banner,
+  .why-us-banner,
+  .services-banner {
+    order: 2;
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    max-height: 22rem;
+    object-fit: cover;
+    margin: 0 0 1.5rem;
+  }
+
+  .why-us-content {
+    position: static;
+    left: auto;
+  }
+
+  .about-us-content,
+  .why-us-content {
+    order: 3;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 0;
+    transform: none;
+  }
+
+  .services-content {
+    order: 3;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem !important;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Admin "home" links used a hard-coded left/top offset (e.g. left:62rem)
+     that only lined up on one specific wide screen size — bring them back
+     into normal flow so they stop landing off-screen. */
+  .manage-users-home-link,
+  .manage-slider-home-link,
+  .manage-products-home-link,
+  .product-details-manage-link {
+    position: static;
+    left: auto;
+    top: auto;
+  }
+
+  .manage-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .manage-contact-field input,
+  .manage-contact-field textarea {
+    width: 100%;
+  }
+
+  /* The Address field has an inline style (position/left/top) baked into
+     ManageContactInfo.jsx for desktop alignment — !important is required
+     here to beat that inline style on mobile so the box doesn't get
+     pushed off-screen. */
+  .manage-contact-field--wide {
+    position: static !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin-top: 0.4rem;
+  }
+
+}
+
+/* ==========================================================================
+   MOBILE  (<= 768px) — matches the Navbar.jsx breakpoint that swaps in
+   the hamburger menu, so this is where the real "phone" layout begins.
+   ========================================================================== */
+@media (max-width: 768px) {
+  html,
+  body,
+  #root {
+    overflow-x: hidden;
+  }
+
+  /* ---------------- Nav ----------------
+     .site-nav is position:sticky with a negative margin-bottom (from
+     index.css) so it visually floats OVER the slider instead of pushing
+     it down — that's the intended look. Keep that trick on mobile too,
+     just re-tuned to the shorter mobile nav height. */
+  .site-nav {
+    position: sticky;
+    top: 0.5rem;
+    margin-bottom: -4.2rem;
+    padding: 0 0.75rem;
+  }
+
+  .site-nav__shell {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.6rem;
+    width: 100%;
+  }
+  .manage-contact-panel--form{
+    height: inherit;
+  }
+  .manage-contact-button{
+    top: 55%;
+    margin-top: 1rem;
+  }
+  .manage-products-hero,.new-product-hero,.manage-slider-hero,.manage-contact-hero,.manage-users-hero{
+    margin-top: 5rem !important;
+  }
+  .site-nav__logo-link {
+    position: static;
+    align-self: flex-start;
+    height: 70% !important;
+    width: 15% !important;
+  }
+
+  .site-nav__logo {
+    height: 3.8rem;
+    max-width: 3.6rem;
+  }
+  .slider-explore:hover{
+    transform: none;
+  }
+  .site-nav__inner {
+    position: relative;
+    align-self: flex-start;
+    margin-left: auto;
+    width: auto;
+    max-width: none;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    padding: 0.55rem 0.9rem;
+    border-radius: 16px;
+  }
+
+  .site-nav__mobile-toggle {
+    display: inline-flex;
+  }
+
+  .site-nav__links,
+  .site-nav__auth {
+    display: none;
+  }
+  .single-product-page{
+    overflow: scroll;
+  }
+  .single-product-image-section{
+    width: 50% !important;
+    height: 100%;
+    left: 20%;
+  }
+  .single-product-image{
+    width: 150% !important;
+  }
+  .single-product-image-wrap{
+    height: 100%;
+    width: 100% !important;
+  }
+  .single-product-details{
+    top: 10%;
+    left: 5%;
+    width: 90%;
+  }
+  .single-product-thumbnails{
+    position: absolute !important;
+    left: 30%;
+  }
+  .single-product-arrows{
+    width: 130%;
+    left: -15%;
+  }
+  .search-prefix-icon{
+    right:5%;
+    top:50%;
+  } 
+  .site-nav__mobile-panel {
+    display: flex;
+    position: absolute;
+    overflow: scroll;
+    top: calc(100% + 0.6rem);
+    right: 0;
+    left: auto;
+    width: min(24rem, calc(100vw - 1.5rem));
+    max-width: none;
+    background: rgba(20, 10, 20, 0.82);
+  }
+
+  .site-nav__mobile-panel:not(.is-open) {
+    display: none;
+  }
+
+  .site-nav__mobile-link {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---------------- Slider ----------------
+     .slider becomes the positioning context for .slider-explore (which
+     is a sibling of .slider__frame in the JSX, not a child of
+     .slider__caption) so the button can be pinned a fixed distance
+     below the caption instead of floating wherever the old fixed
+     left/top percentages happened to land. */
+  .slider {
+    position: relative;
+  }
+
+  .slider,
+  .sliderMask {
+    height: 68vh;
+    min-height: 26rem;
+    width: 100%;
+  }
+
+  .slider__caption {
+    left: 50%;
+    top: 42%;
+    width: calc(100% - 2.5rem);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-align: center;
+    padding: 0;
+  }
+
+  .slider__caption h2 {
+    font-size: clamp(1.9rem, 7vw, 2.6rem);
+  }
+
+  .slider__caption p {
+    font-size: 1.05rem;
+  }
+
+  .slider-explore {
+    position: absolute;
+    left: 50%;
+    top: 68%;
+    transform: translateX(-50%);
+    margin-top: 0;
+    height: auto;
+    width: fit-content;
+    font-size: 1.05rem;
+    padding: 0.7rem 1.8rem;
+  }
+
+  @keyframes slidetTitleAnimation {
+    0% { opacity: 0; left: -4rem; }
+    50% { opacity: 1; left: 0; }
+    100% {}
+  }
+
+  @keyframes slidetSubTitleAnimation {
+    0% { opacity: 0; left: 4rem; }
+    50% { opacity: 1; left: 0; }
+    100% {}
+  }
+
+  .slider__nav {
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.4rem;
+  }
+
+  /* ---------------- About / Why-us / Services ---------------- */
+  .about-us-container,
+  .why-us-container,
+  .services-container {
+    padding: 2rem 1.25rem;
+  }
+
+  .about-us-hero h1,
+  .why-us-hero h1,
+  .services-hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .about-us-content,
+  .why-us-content {
+    gap: 1.75rem;
+  }
+
+  .services-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem !important;
+  }
+
+  .about-us-banner,
+  .why-us-banner,
+  .services-banner {
+    max-height: 16rem;
+    margin: 1.25rem 0;
+  }
+
+  /* ---------------- Catalogue ---------------- */
+  .catalogue-page {
+    padding: 5rem 1rem 2rem;
+  }
+
+  .catalogue-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogue-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogue-hero .catalogue-toolbar__category {
+    position: static;
+    width: 100%;
+    margin-bottom: 0.6rem;
+  }
+
+  .catalogue-category-button {
+    width: 100%;
+    min-width: 0;
+    margin-top: 2rem;
+  }
+
+  .catalogue-category-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .catalogue-category-menu__search {
+    display: grid;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .catalogue-category-menu__search-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .catalogue-category-menu__search input {
+    width: 100%;
+    padding: 0.8rem 0.95rem;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.05);
+    color: var(--text-primary);
+    outline: none;
+  }
+
+  .catalogue-search {
+    justify-items: stretch;
+    width: 100%;
+  }
+
+  .catalogue-search__label {
+    position: static;
+    left: auto !important;
+    text-align: left;
+  }
+
+  .catalogue-search__field {
+    position: relative;
+    width: 100%;
+  }
+
+  .catalogue-search input {
+    position: static;
+    left: auto !important;
+    width: 100% !important;
+    padding-left: 2.45rem;
+  }
+
+
+  .catalogue-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.95rem;
+  }
+
+  .catalogue-card {
+    border-radius: 22px;
+    padding: 0.45rem;
+    height: 13.6rem;
+  }
+
+  .catalogue-card__image-wrap {
+    flex: 0 0 clamp(7.4rem, 31vw, 9rem);
+    min-width: clamp(7.4rem, 31vw, 9rem);
+    max-width: clamp(7.4rem, 31vw, 9rem);
+    min-height: 0;
+    height: 100%;
+  }
+
+  .catalogue-card__body {
+    padding: 0.4rem 0.55rem 0.4rem 0.7rem;
+    gap: 0.75rem;
+  }
+
+  .catalogue-card__info {
+    gap: 0.4rem;
+  }
+
+  .catalogue-card__eyebrow {
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  .catalogue-card__category {
+    text-align: right;
+  }
+
+  .catalogue-card__name {
+    font-size: 1rem;
+  }
+
+  .catalogue-card__meta {
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .catalogue-status {
+    padding: 0.34rem 0.62rem;
+    font-size: 0.72rem;
+  }
+
+  .catalogue-card__price {
+    font-size: 1.12rem;
+  }
+
+  .catalogue-card__size {
+    flex: 1 0 100%;
+    width: fit-content;
+    padding: 0.28rem 0.6rem;
+    font-size: 0.76rem;
+  }
+
+  /* ---------------- Contact & Footer ---------------- */
+  .contact {
+    padding: 2.5rem 1rem;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info h1 {
+    margin-top: 0;
+    font-size: 2.4rem;
+  }
+
+  .contact-list {
+    padding: 1rem 1.1rem;
+  }
+
+  .footer-details-banner {
+    width: min(100%, 22rem);
+    max-width: 100%;
+    height: auto;
+    left: auto;
+    top: auto;
+    margin: 1rem auto 0;
+    object-fit: contain;
+    display: block;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* ---------------- Admin pages ---------------- */
+  .manage-users-page,
+  .manage-slider-page,
+  .manage-contact-page,
+  .manage-products-page,
+  .product-details-page,
+  .new-product-page {
+    padding: 4.5rem 1rem 2rem;
+  }
+
+  .manage-users-hero,
+  .manage-slider-hero,
+  .manage-contact-hero,
+  .manage-products-hero,
+  .product-details-hero,
+  .new-product-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 0;
+    gap: 0.75rem;
+  }
+
+  .manage-users-home-link,
+  .manage-slider-home-link,
+  .manage-products-home-link,
+  .product-details-manage-link,
+  .product-details-home-link {
+    margin-top: 0;
+  }
+
+  .manage-users-hero__stats,
+  .manage-slider-hero__stats,
+  .manage-products-hero__stats {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .manage-slider-grid,
+  .manage-users-grid,
+  .manage-contact-grid,
+  .manage-products-grid,
+  .new-product-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .manage-slider-panel,
+  .manage-users-panel,
+  .manage-contact-panel,
+  .manage-products-panel,
+  .new-product-panel,
+  .product-details-panel {
+    padding: 1.1rem;
+  }
+
+  .manage-slider-fields,
+  .manage-users-fields,
+  .manage-contact-fields,
+  .manage-products-fields,
+  .new-product-fields,
+  .manage-products-previews,
+  .new-product-previews {
+    grid-template-columns: 1fr;
+  }
+
+  .manage-contact-field input,
+  .manage-contact-field textarea,
+  .manage-slider-field input,
+  .manage-slider-field textarea {
+    width: 100%;
+  }
+
+  .manage-users-table__row,
+  .manage-products-table__row,
+  .product-details-table__row {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .manage-users-table__row--head,
+  .manage-products-table__row--head,
+  .product-details-table__row--head {
+    display: none;
+  }
+
+  .manage-users-table__row:not(.manage-users-table__row--head) > span,
+  .manage-products-table__row:not(.manage-products-table__row--head) > span,
+  .product-details-table__row:not(.product-details-table__row--head) > span {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.2rem 0;
+  }
+
+  .manage-users-table__row:not(.manage-users-table__row--head) > span::before,
+  .manage-products-table__row:not(.manage-products-table__row--head) > span::before,
+  .product-details-table__row:not(.product-details-table__row--head) > span::before {
+    content: attr(data-label);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .manage-products-table__actions,
+  .manage-products-select,
+  .manage-products-remove,
+  .manage-users-remove {
+    width: 100%;
+  }
+
+  .product-details-images {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* ---------------- Login ---------------- */
+  .login-page {
+    padding: 1.25rem;
+  }
+
+  .login-card {
+    padding: 1.5rem;
+    border-radius: 22px;
+  }
+
+  /* ---------------- Single product ---------------- */
+  .single-product-page {
+    padding: 4rem 0.9rem 1rem;
+  }
+
+  .single-product-shell {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .single-product-zoom {
+    display: none !important;
+  }
+
+  .single-product-topbar {
+    align-items: flex-start;
+  }
+
+  .single-product-breadcrumb {
+    font-size: 0.88rem;
+    margin: 0.45rem 0 0.65rem;
+    flex-wrap: wrap;
+  }
+
+  .single-product-image-section {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 24px;
+  }
+
+  .single-product-image-wrap {
+    width: 100%;
+    height: min(58vh, calc(100vh - 15.5rem));
+    max-height: 58vh;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+
+  .single-product-arrows {
+    top: 50%;
+    padding: 0.25rem;
+  }
+
+  .single-product-arrow {
+    width: 2.35rem;
+    height: 2.35rem;
+    font-size: 1.7rem;
+  }
+
+  .single-product-thumbnails {
+    position: static;
+    justify-content: flex-start;
+    transform: none;
+    overflow-x: auto;
+    padding-bottom: 0.1rem;
+    gap: 0.45rem;
+  }
+
+  .single-product-thumb {
+    width: 3.25rem;
+    height: 2.35rem;
+    border-radius: 10px;
+  }
+
+  .single-product-details {
+    padding: 0.9rem;
+    border-radius: 22px;
+    gap: 0.8rem;
+  }
+
+  .single-product-details__header {
+    flex-direction: column;
+    gap: 0.55rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .single-product-details__price-block {
+    justify-items: start;
+    text-align: left;
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    min-width: 0;
+  }
+
+  .single-product-details__name {
+    font-size: 1.28rem;
+  }
+
+  .single-product-details__id {
+    font-size: 0.82rem;
+  }
+
+  .single-product-details__price {
+    font-size: 1.2rem;
+  }
+
+  .single-product-details__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .single-product-details__field {
+    padding: 0.68rem 0.75rem;
+    border-radius: 16px;
+  }
+
+  .single-product-details__label {
+    font-size: 0.66rem;
+  }
+
+  .single-product-details__value,
+  .single-product-details__description .single-product-details__value {
+    font-size: 0.88rem;
+    line-height: 1.35;
+  }
+
+  .single-product-details__description {
+    gap: 0.3rem;
+    padding-top: 0.2rem;
+  }
+}
+
+/* ==========================================================================
+   SMALL PHONES (<= 600px)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .about-us-hero h1,
+  .why-us-hero h1,
+  .services-hero h1 {
+    font-size: 2.1rem;
+  }
+  .site-nav__logo-link {
+    width: 20% !important;
+  }
+  .about-us-hero p,
+  .why-us-hero p,
+  .services-hero p {
+    font-size: 1.05rem;
+    text-indent: 0;
+  }
+  .catalogue-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-left:15%;
+  }
+  .catalogue-card{
+    width: 80%;
+  }
+  .single-product-details{
+    top: 10%;
+  }
+  .single-product-arrows{
+    width: 140%;
+    left: -20%;
+  }
+  .single-product-thumbnails{
+    left: 22%;
+    top: -20%;
+  }
+  .about-us-content,
+  .why-us-content {
+    gap: 1.5rem;
+  }
+
+  .about-us-content__item,
+  .why-us-content__item {
+    flex: 1 1 8rem;
+  }
+
+  .services-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem !important;
+  }
+
+  .contact-list {
+    padding: 0.95rem 1rem;
+  }
+
+  .footer-top {
+    padding: 1.1rem;
+  }
+
+  .footer-brand h2 {
+    font-size: 1.9rem;
+  }
+
+  .site-nav__inner {
+    border-radius: 14px;
+  }
+}
+
+/* ==========================================================================
+   PHONES (<= 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  html,
+  body,
+  #root {
+    overflow-x: hidden;
+    margin-right: 0 !important;
+  }
+
+  .site-nav__mobile-panel {
+    background-color: rgba(31, 10, 24, 0.9);
+  }
+  
+  .site-nav__logo-link {
+    height: 3.4rem;
+    width: fit-content;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .about-us-hero h1,
+  .why-us-hero h1,
+  .services-hero h1 {
+    font-size: 1.9rem;
+    letter-spacing: -0.03em;
+  }
+  .single-product-details{
+    top: 10%;
+  }
+  .single-product-image-section{
+    top: 0;
+    height: auto;
+  }
+  .single-product-thumbnails{
+    left:15%;
+  }
+  .catalogue-category-button{
+    margin-top: 2rem !important;
+  }
+  .about-us-hero p,
+  .why-us-hero p,
+  .services-hero p {
+    font-size: 1rem;
+    padding-top: 0.75rem;
+  }
+  .manage-contact-panel--form{
+    height:100%;
+  }
+  .manage-contact-button{
+    position: inherit;
+  }
+  .about-us-banner,
+  .why-us-banner,
+  .services-banner {
+    max-height: 11rem;
+  }
+
+  .about-us-content,
+  .why-us-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .5rem;
+  }
+
+  .services-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem !important;
+  }
+
+  .why-us-content-item__icon,.about-us-content-item__icon {
+    height: 3%;
+    min-height: 3%;
+  }
+
+  .services-content-item {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+  .services-content-item:hover{
+    transform: none;
+  }
+  .slider__caption h2 {
+    font-size: 1.7rem;
+  }
+
+  .slider__caption p {
+    font-size: 0.95rem;
+  }
+
+  .slider,
+  .sliderMask {
+    height: 60vh;
+    min-height: 22rem;
+  }
+
+  .catalogue-grid {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    margin-left: 5%;
+  }
+  .catalogue-card{
+    width: 90%;
+  }
+
+  .catalogue-card__image-wrap {
+    flex-basis: 7.1rem;
+    min-width: 7.1rem;
+    max-width: 7.1rem;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .catalogue-card__body {
+    padding: 0.35rem 0.5rem 0.35rem 0.65rem;
+  }
+
+  .catalogue-card__name {
+    font-size: 0.98rem;
+  }
+
+  .catalogue-card__price {
+    font-size: 1.05rem;
+  }
+
+  .catalogue-category-button {
+    margin-top: 0;
+  }
+
+  .site-nav__mobile-link {
+    width: 100%;
+    height: auto;
+  }
+
+  .contact-info h1 {
+    font-size: 2rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.95rem;
+  }
+
+  .manage-contact-hero,
+  .manage-products-hero,
+  .new-product-hero,
+  .manage-users-hero,
+  .manage-slider-hero,
+  .product-details-hero {
+    gap: 0.75rem;
+  }
+
+  .manage-contact-panel,
+  .manage-products-panel,
+  .new-product-panel,
+  .manage-users-panel,
+  .manage-slider-panel {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .manage-contact-page,
+  .manage-products-page,
+  .new-product-page,
+  .manage-users-page,
+  .manage-slider-page,
+  .product-details-page {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 3.5rem;
+  }
+
+  .manage-users-table__row,
+  .manage-products-table__row,
+  .product-details-table__row {
+    padding: 0.9rem;
+  }
+
+  .manage-users-stat,
+  .manage-products-stat,
+  .manage-slider-stat {
+    width: 100%;
+  }
+
+  .product-details-images {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-details-banner {
+    width: min(100%, 20rem);
+    height: auto;
+    margin: 0.85rem auto 0;
+    object-fit: contain;
+  }
+
+  .login-card {
+    padding: 1.25rem;
+  }
+
+  .login-card h1 {
+    font-size: 1.9rem;
+  }
+}
+
+/* ==========================================================================
+   VERY SMALL PHONES (<= 380px)
+   ========================================================================== */
+@media (max-width: 380px) {
+  .about-us-hero h1,
+  .why-us-hero h1,
+  .services-hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .site-nav__logo {
+    height: 3.8rem;
+    width: 3.8rem;
+    max-width: 3.8rem;
+  }
+  .site-nav__logo-link {
+    width: 20% !important;
+  }
+  .slider__caption h2 {
+    font-size: 1.45rem;
+  }
+  .slider-explore {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.4rem;
+  }
+  .catalogue-card{
+    width: 100%;
+    margin-left: -2%;
+  }
+  .contact-info h1 {
+    font-size: 1.75rem;
+  }
+
+  .catalogue-card__body h2 {
+    font-size: 1.02rem;
+  }
+
+  /* Single product: trim header chrome on the smallest phones so the main
+     image/details block stays visible without vertical overflow. */
+  .single-product-page {
+    padding-top: 3.6rem;
+  }
+
+  .single-product-arrows{
+    width: 140%;
+    left: -20%;
+  }
+
+  .single-product-breadcrumb {
+    margin-top: -8%;
+    margin-right: 5%;
+  }
+  .single-product-back-button{
+    margin-top: -10%;
+  }
+  .single-product-image-section {
+    padding: 0.5rem;
+    width: 70% !important;
+    height: 90%;
+    top: 15%;
+    left: 15%;
+  }
+
+  .single-product-thumbnails {
+    left: 10%;
+  }
+
+  .single-product-image-wrap {
+    min-height: 12.75rem;
+    height: 100% !important;
+    width: 100%;
+  }
+
+  .single-product-details {
+    padding: 0.8rem;
+    gap: 0.72rem;
+    top:15%;
+  }
+
+  .single-product-details__name {
+    font-size: 1.15rem;
+  }
+
+  .single-product-details__price {
+    font-size: 1.08rem;
+  }
+
+  .single-product-details__grid {
+    gap: 0.45rem;
+  }
+
+  .single-product-details__field {
+    padding: 0.62rem 0.68rem;
+  }
+
+  .single-product-status {
+    padding: 0.32rem 0.65rem;
+    font-size: 0.74rem;
+  }
+}
+
+/* ==========================================================================
+   LANDSCAPE PHONES — short viewport height, keep the slider from eating
+   the whole screen so the rest of the page is reachable.
+   ========================================================================== */
+@media (max-width: 900px) and (max-height: 480px) and (orientation: landscape) {
+  .slider,
+  .sliderMask {
+    height: 100vh;
+    min-height: 0;
+  }
+
+  .slider__caption {
+    top: 50%;
+  }
+}
+
+/* ==========================================================================
+   LARGE DESKTOP (>= 1441px) — unchanged from the original file.
+   ========================================================================== */
+@media (min-width: 1441px) {
+  .site-nav__inner {
+    padding: 0.9rem 5.5rem;
+  }
+
+  .site-nav__links {
+    gap: 2.25rem;
+  }
+
+  .contact-container {
+    max-width: 1280px;
+  }
+
+  .footer-inner {
+    max-width: 1220px;
+  }
+}
