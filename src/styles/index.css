@@ -4962,6 +4962,9 @@ video {
   .site-nav__logo-link {
     width: 20% !important;
   }
+  .slider__nav{
+	top: 70%;
+  }
   .about-us-hero p,
   .why-us-hero p,
   .services-hero p {
