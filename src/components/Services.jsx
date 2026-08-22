@@ -30,7 +30,7 @@ function Services(){
                     </div>
                     <div className="services-content-item">
                         <span className="services-content-item__icon">
-                            <img className="services-content-item__image" src="/assets/Icon-nonWovenBag.png" alt="Img Not Available" />
+                            <img className="services-content-item__image" src="/assets/Icon-NonWovenBag.png" alt="Img Not Available" />
                         </span>
                         <h5 className="services-content-item__subtitle">Non-Woven Bags</h5>
                     </div>

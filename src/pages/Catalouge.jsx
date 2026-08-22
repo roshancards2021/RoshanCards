@@ -218,10 +218,6 @@ function Catalouge() {
 
     return (
         <>
-            <Helmet>
-                <title>RoshanCards | Catalogue Page readymade & customized Invitations, Calendars, Diaries.</title>
-                <meta name="description" content="Explore our catalogue of wedding invitations, birthday cards, calendars and diaries."  />
-            </Helmet>
             <Navbar />
 
             <main className="catalogue-page">
@@ -351,6 +347,10 @@ function Catalouge() {
                     <p className="catalogue-state">No matching products found.</p>
                 )}
             </main>
+            <Helmet>
+                <title>RoshanCards | Catalogue Page readymade & customized Invitations, Calendars, Diaries.</title>
+                <meta name="description" content="Explore our catalogue of wedding invitations, birthday cards, calendars and diaries."  />
+            </Helmet>
         </>
     )
 }

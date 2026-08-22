@@ -11,11 +11,6 @@ function App() {
 
   return (
     <>
-      <Helmet>
-        <title>  RoshanCards - Premium Invitation Cards, Calendars & Diaries </title>
-        <meta  name="description" content="Browse premium invitation cards, wedding cards, calendars and diaries from RoshanCards."/>
-      </Helmet>
-
       <Navbar />
       <Slider />
       <AboutUs />
@@ -23,6 +18,10 @@ function App() {
       <Services />
       <Contact />
       <Footer />
+      <Helmet>
+        <title>  RoshanCards - Premium Invitation Cards, Calendars & Diaries </title>
+        <meta  name="description" content="Browse premium invitation cards, wedding cards, calendars and diaries from RoshanCards."/>
+      </Helmet>
     </>
   )
 }
