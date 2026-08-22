@@ -18,6 +18,18 @@ function Footer(){
                             We create modern, premium card designs with a focus on quality printing, clean presentation, and friendly support.
                         </p>
                         <a className="footer-cta" href={phone ? `tel:${phone}` : '#'}>{phone ? 'Call us Now' : 'Contact us'}</a>
+
+                        <div className="footer-bottom">
+                            <div className="social">
+                                <div className="social-item">
+                                    <a target="_blank" href="https://www.instagram.com/roshancards?igsi=MTczZGJoNWd3aDBjNQ==" aria-label="Instagram"><img src="/assets/instagram-icon.png" alt="Instagram Link" /><span>Instagram</span></a>
+                                </div>
+                                <div className="social-item">
+                                    <a target="_blank" href="https://www.facebook.com/share/19UPQuTQKn/" aria-label="Facebook"><img src="/assets/facebook-icon.png" alt="Facebook Link" /><span>Facebook</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="copyright">© {new Date().getFullYear()} Roshan Cards. All rights reserved.</div>
                     </div>
 
                     <div className="footer-details">
@@ -31,16 +43,7 @@ function Footer(){
                         </div>
                         <img src="/assets/Brand.png" alt="RoshanCards Brand Image" className="footer-details-banner" />
                     </div>
-                </div>
-
-                <div className="footer-bottom">
-                    <div className="social">
-                        <a href="#" aria-label="Instagram">Instagram</a>
-                        <a href="#" aria-label="Facebook">Facebook</a>
-                        <a href="#" aria-label="Twitter">Twitter</a>
-                    </div>
-                    <div className="copyright">© {new Date().getFullYear()} Roshan Cards. All rights reserved.</div>
-                </div>
+                </div> 
             </div>
         </footer>
     )
