@@ -279,7 +279,7 @@ function Catalouge() {
                                 type="search"
                                 value={searchQuery}
                                 onChange={(event) => setSearchQuery(event.target.value)}
-                                placeholder="Search by name or product ID"
+                                placeholder="Search Product by name or ID"
                             />
                             <span className="search-prefix-icon" style={{ fontSize: 16, lineHeight: 1 }} aria-hidden="true">🔍</span>
                         </div>
