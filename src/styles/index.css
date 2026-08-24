@@ -189,15 +189,12 @@ a {
 	left: -100%;
 	right: 0;
 	padding: 1rem;
-	border-radius: 18px;
-	background: rgba(0, 0, 0, 0.46);
-	backdrop-filter: blur(18px) saturate(160%);
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	border-radius: 9px;
+	background: rgba(0, 0, 0, 0.32);
+	backdrop-filter: blur(8px) saturate(160%);
 	-webkit-backdrop-filter: blur(18px) saturate(160%);
-	box-shadow: 0 20px 42px rgba(15, 23, 42, 0.16);
-	max-height: 0;
-	overflow: scroll;
-	transform: translateY(-6px);
-	transition: opacity 180ms ease, max-height 220ms ease, transform 220ms ease;
+	box-shadow: 0 16px 38px rgba(15, 23, 42, 0.12);
 }
 
 .site-nav__mobile-panel.is-open {
@@ -5057,10 +5054,6 @@ video {
   #root {
     overflow-x: hidden;
     margin-right: 0 !important;
-  }
-
-  .site-nav__mobile-panel {
-    background-color: rgba(31, 10, 24, 0.9);
   }
   
   .site-nav__logo-link {
