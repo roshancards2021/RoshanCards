@@ -92,12 +92,12 @@ ${payload.message}`;
                 <form className="contact-form" onSubmit={handleSubmit}>
                     <label>
                         <span className="label">Name</span>
-                        <input name="name" type="text" placeholder="Your name" required />
+                        <input name="name" type="text" placeholder="Your Name" required />
                     </label>
 
                     <label>
                         <span className="label">Mobile No.</span>
-                        <input name="mobile" type="tel" placeholder="1234567890" required />
+                        <input name="mobile" type="tel" placeholder="Your Mobile Number" required />
                     </label>
 
                     <label>

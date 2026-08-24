@@ -46,12 +46,11 @@ function Login() {
 		<main className="login-page">
 			<section className="login-card" aria-labelledby="login-title">
 				<div className="login-card__intro">
-					<p className="login-card__eyebrow">Welcome back</p>
+					<p className="login-card__eyebrow">Roshan Cards</p>
 					<h1 id="login-title">Sign in to your account</h1>
-					<p className="login-card__copy">
-						Login is Not Required, You Can Still Proceed to Catalouge by
+					<p style={{ maxWidth: '100%' }} className="login-card__copy">
+						If you want to see the catalogue, please{' '}
 						<span className="login-form__note">
-							{'  '}
 							<Link to="/catalogue" className="login-form__link">
 							Click here.
 							</Link>
@@ -77,7 +76,7 @@ function Login() {
 					</button>
 
 					<p className="login-form__note">
-						Prefer to skip the form?{' '}
+						Can't Login?{' '}
 						<Link to="/home" className="login-form__link">
 							Go to Home
 						</Link>

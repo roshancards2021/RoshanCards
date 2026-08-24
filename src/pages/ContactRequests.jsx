@@ -64,7 +64,7 @@ function ContactRequests() {
                 </div>
             </section>
 
-            <section className="manage-contact-grid">
+            <section id="messageBox" className="manage-contact-grid">
                 <div id="requestBox" className="manage-contact-panel manage-contact-panel--table">
                     <div className="manage-contact-panel__heading">
                         <p className="manage-contact-panel__eyebrow">Incoming enquiries</p>
@@ -91,7 +91,8 @@ function ContactRequests() {
                                     <span data-label="Name">{request.name}</span>
                                     <span data-label="Phone">{request.phone}</span>
                                     <span title={request.message} data-label="Message">
-                                        {request.message.length > 50 ? `${request.message.substring(0, 50)}...` : request.message}
+                                        {/* {request.message.length > 50 ? `${request.message.substring(0, 50)}...` : request.message} */}
+                                        {request.message}
                                     </span>
                                     <span data-label="Requested Date">{request.createdAt ? new Date(request.createdAt).toLocaleString() : '—'}</span>
                                     <span className="manage-users-table__actions" data-label="Actions">
