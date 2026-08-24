@@ -5120,6 +5120,10 @@ video {
   .services-content {
     grid-template-columns: repeat(2, minmax(200px,2fr));
     gap: 1.5rem !important;
+	transform: scale(.8);
+	margin-left: -15%;
+	margin-top: -20%;
+	margin-bottom: -40%;
   }
 
   .why-us-content-item__icon,.about-us-content-item__icon {
