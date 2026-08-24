@@ -4056,7 +4056,7 @@ video {
    Remove the "stuck hover" effect on touch devices (phones/tablets),
    where a tapped element stays visually zoomed/highlighted after tap.
    -------------------------------------------------------------------- */
-/* @media (hover: none) {
+@media (hover: none) {
   .services-content-item:hover,
   .about-us-content__image:hover,
   .why-us-content__image:hover,
@@ -4066,7 +4066,7 @@ video {
   .footer-card a:hover {
     transform: none;
   }
-} */
+}
 
 /* ==========================================================================
    TABLET  (<= 1024px)
@@ -5231,6 +5231,9 @@ video {
     width: 100%;
   }
 
+  .slider-explore:hover{
+	transform:none;
+  }
   .product-details-images {
     grid-template-columns: 1fr;
   }
@@ -5259,6 +5262,9 @@ video {
   .why-us-hero h1,
   .services-hero h1 {
     font-size: 1.6rem;
+  }
+  .slider-explore:hover{
+	transform:none;
   }
 
   .site-nav__logo {
@@ -5363,7 +5369,9 @@ video {
     height: 100vh;
     min-height: 0;
   }
-
+  .slider-explore:hover{
+	transform:none;
+  }
   .slider__caption {
     top: 50%;
   }
