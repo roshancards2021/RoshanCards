@@ -304,7 +304,9 @@ function Catalouge() {
                                     style={{ textDecoration: 'none', color: 'inherit' }}
                                 >
                                     <article className="catalogue-card">
-                                        <LazyCatalogueImage src={firstImage} alt={product.name} />
+                                        <div className="catalogue-image-wrap">
+                                            <LazyCatalogueImage src={firstImage} alt={product.name} />
+                                        </div>
 
                                         <div className="catalogue-card__body">
                                             <div className="catalogue-card__info">
