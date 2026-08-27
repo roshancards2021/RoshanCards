@@ -86,11 +86,11 @@ function NewProduct() {
         setErrorMessage('')
         setStatusMessage('')
 
-        if (!imageFiles.first || !imageFiles.second || !imageFiles.third) {
-            setErrorMessage('Please upload all three product images before saving.')
-            setIsSubmitting(false)
-            return
-        }
+        // if (!imageFiles.first || !imageFiles.second || !imageFiles.third) {
+        //     setErrorMessage('Please upload all three product images before saving.')
+        //     setIsSubmitting(false)
+        //     return
+        // }
 
         try {
             const payload = new FormData()
@@ -99,9 +99,21 @@ function NewProduct() {
                 payload.append(key, value)
             })
 
-            payload.append('image1', imageFiles.first)
-            payload.append('image2', imageFiles.second)
-            payload.append('image3', imageFiles.third)
+            // payload.append('image1', imageFiles.first)
+            // payload.append('image2', imageFiles.second)
+            // payload.append('image3', imageFiles.third)
+
+            if (imageFiles.first) {
+                payload.append('image1', imageFiles.first)
+            }
+            
+            if (imageFiles.second) {
+                payload.append('image2', imageFiles.second)
+            }
+            
+            if (imageFiles.third) {
+                payload.append('image3', imageFiles.third)
+            }
 
             const response = await fetch(`${apiBaseUrl}/products`, {
                 method: 'POST',
@@ -263,16 +275,16 @@ function NewProduct() {
 
                         <label className="new-product-field new-product-field--wide">
                             <span>Product image 1</span>
-                            <input type="file" accept="image/*" onChange={(event) => handleImageChange('first', event)} required />
+                            <input type="file" accept="image/*" onChange={(event) => handleImageChange('first', event)} />
                         </label>
 
                         <label className="new-product-field new-product-field--wide">
                             <span>Product image 2</span>
-                            <input type="file" accept="image/*" onChange={(event) => handleImageChange('second', event)} required />
+                            <input type="file" accept="image/*" onChange={(event) => handleImageChange('second', event)} />
                         </label>
                         <label className="new-product-field new-product-field--wide">
                             <span>Product image 3</span>
-                            <input type="file" accept="image/*" onChange={(event) => handleImageChange('third', event)} required />
+                            <input type="file" accept="image/*" onChange={(event) => handleImageChange('third', event)} />
                         </label>
                     </div>
 

@@ -229,21 +229,49 @@ app.post('/products', upload.fields([
     let uploadedImages = [];
 
     try {
+        // const imageOne = req.files?.image1?.[0];
+        // const imageTwo = req.files?.image2?.[0];
+        // const imageThree = req.files?.image3?.[0];
+
+        // if (!imageOne || !imageTwo || !imageThree) {
+        //     return res.status(400).json({ error: 'All three product images are required.' });
+        // }
+
+        // uploadedImages = await Promise.all([
+        //     uploadFileToFirebaseStorage(imageOne),
+        //     uploadFileToFirebaseStorage(imageTwo),
+        //     uploadFileToFirebaseStorage(imageThree),
+        // ]);
+
+        // const imageUrls = uploadedImages.map((item) => item.url);
+
         const imageOne = req.files?.image1?.[0];
         const imageTwo = req.files?.image2?.[0];
         const imageThree = req.files?.image3?.[0];
-
-        if (!imageOne || !imageTwo || !imageThree) {
-            return res.status(400).json({ error: 'All three product images are required.' });
+            
+        uploadedImages = [];
+            
+        if (imageOne) {
+            uploadedImages.push(
+                await uploadFileToFirebaseStorage(imageOne)
+            );
         }
-
-        uploadedImages = await Promise.all([
-            uploadFileToFirebaseStorage(imageOne),
-            uploadFileToFirebaseStorage(imageTwo),
-            uploadFileToFirebaseStorage(imageThree),
-        ]);
-
-        const imageUrls = uploadedImages.map((item) => item.url);
+        
+        if (imageTwo) {
+            uploadedImages.push(
+                await uploadFileToFirebaseStorage(imageTwo)
+            );
+        }
+        
+        if (imageThree) {
+            uploadedImages.push(
+                await uploadFileToFirebaseStorage(imageThree)
+            );
+        }
+        
+        const imageUrls = uploadedImages.map(
+            (item) => item.url
+        );
 
         const product = await createProduct({
             ...req.body,
@@ -288,26 +316,65 @@ app.put('/products/:id', upload.fields([
         const imageOne = req.files?.image1?.[0];
         const imageTwo = req.files?.image2?.[0];
         const imageThree = req.files?.image3?.[0];
-        if ((imageOne && !imageTwo) || (!imageOne && imageTwo) || (imageOne && !imageThree) || (!imageOne && imageThree)) {
-            return res.status(400).json({ error: 'Upload All product images or keep the existing ones.' });
-        }
+        // if ((imageOne && !imageTwo) || (!imageOne && imageTwo) || (imageOne && !imageThree) || (!imageOne && imageThree)) {
+        //     return res.status(400).json({ error: 'Upload All product images or keep the existing ones.' });
+        // }
 
-        const imageUrls = imageOne && imageTwo && imageThree
-            ? (uploadedImages = await Promise.all([
-                uploadFileToFirebaseStorage(imageOne),
-                uploadFileToFirebaseStorage(imageTwo),
-                uploadFileToFirebaseStorage(imageThree),
-            ])).map((item) => item.url)
-            : existingProduct.imageUrls || [];
+
+
+        // const imageUrls = imageOne && imageTwo && imageThree
+        //     ? (uploadedImages = await Promise.all([
+        //         uploadFileToFirebaseStorage(imageOne),
+        //         uploadFileToFirebaseStorage(imageTwo),
+        //         uploadFileToFirebaseStorage(imageThree),
+        //     ])).map((item) => item.url)
+        //     : existingProduct.imageUrls || [];
+
+        const imageUrls = [...(existingProduct.imageUrls || [])];
+            
+        if (imageOne) {
+            const uploaded = await uploadFileToFirebaseStorage(imageOne);
+            uploadedImages.push(uploaded);
+        
+            if (imageUrls[0]) {
+                await deleteImageByUrl(imageUrls[0]);
+            }
+        
+            imageUrls[0] = uploaded.url;
+        }
+        
+        if (imageTwo) {
+            const uploaded = await uploadFileToFirebaseStorage(imageTwo);
+            uploadedImages.push(uploaded);
+        
+            if (imageUrls[1]) {
+                await deleteImageByUrl(imageUrls[1]);
+            }
+        
+            imageUrls[1] = uploaded.url;
+        }
+        
+        if (imageThree) {
+            const uploaded = await uploadFileToFirebaseStorage(imageThree);
+            uploadedImages.push(uploaded);
+        
+            if (imageUrls[2]) {
+                await deleteImageByUrl(imageUrls[2]);
+            }
+        
+            imageUrls[2] = uploaded.url;
+        }
 
         const product = await updateProductById(req.params.id, {
             ...req.body,
             imageUrls,
         });
 
-        if (imageOne && imageTwo && imageThree && existingProduct.imageUrls) {
-            await Promise.allSettled((existingProduct.imageUrls || []).map((imageUrl) => deleteImageByUrl(imageUrl)));
-        }
+        // if (imageOne && imageTwo && imageThree && existingProduct.imageUrls) {
+        //     await Promise.allSettled((existingProduct.imageUrls || []).map((imageUrl) => deleteImageByUrl(imageUrl)));
+        // }
+
+
 
         res.json({ product });
     } catch (err) {

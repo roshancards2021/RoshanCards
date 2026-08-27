@@ -177,10 +177,10 @@ function ManageProducts() {
             return
         }
 
-        if ((imageFiles.first && !imageFiles.second) || (!imageFiles.first && imageFiles.second) || (imageFiles.first && !imageFiles.third) || (!imageFiles.first && imageFiles.third) || (imageFiles.second && !imageFiles.third) || (!imageFiles.second && imageFiles.third)) {
-            setErrorMessage('Upload all replacement images or keep the existing ones.')
-            return
-        }
+        // if ((imageFiles.first && !imageFiles.second) || (!imageFiles.first && imageFiles.second) || (imageFiles.first && !imageFiles.third) || (!imageFiles.first && imageFiles.third) || (imageFiles.second && !imageFiles.third) || (!imageFiles.second && imageFiles.third)) {
+        //     setErrorMessage('Upload all replacement images or keep the existing ones.')
+        //     return
+        // }
 
         setIsSaving(true)
         setErrorMessage('')
@@ -193,9 +193,21 @@ function ManageProducts() {
                 payload.append(key, value)
             })
 
-            if (imageFiles.first && imageFiles.second && imageFiles.third) {
+            // if (imageFiles.first && imageFiles.second && imageFiles.third) {
+            //     payload.append('image1', imageFiles.first)
+            //     payload.append('image2', imageFiles.second)
+            //     payload.append('image3', imageFiles.third)
+            // }
+
+            if (imageFiles.first) {
                 payload.append('image1', imageFiles.first)
+            }
+            
+            if (imageFiles.second) {
                 payload.append('image2', imageFiles.second)
+            }
+            
+            if (imageFiles.third) {
                 payload.append('image3', imageFiles.third)
             }
 

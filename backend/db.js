@@ -418,8 +418,11 @@ export async function createProduct(productData) {
 		throw new Error('Status must be in-stock, coming-soon, or out-of-stock.')
 	}
 
-	if (imageUrls.length !== 3) {
-		throw new Error('Three product images are required.')
+	// if (imageUrls.length !== 3) {
+	// 	throw new Error('Three product images are required.')
+	// }
+	if (!Array.isArray(imageUrls)) {
+    	throw new Error('Image URLs must be an array.')
 	}
 
 	const duplicateQuery = query(productsRef, where('productId', '==', productId), limit(1))
@@ -469,6 +472,7 @@ export async function getProductById(productId) {
 
 export async function updateProductById(productId, productData) {
 	ensureValidId(productId, 'Invalid product id.')
+	const productsRef = await getProductsCollection()
 	const productRef = doc(db, productsCollectionName, productId)
 	const existingSnapshot = await getDoc(productRef)
 
@@ -504,8 +508,11 @@ export async function updateProductById(productId, productData) {
 		throw new Error('Status must be in-stock, coming-soon, or out-of-stock.')
 	}
 
-	if (imageUrls.length !== 3) {
-		throw new Error('Three product images are required.')
+	// if (imageUrls.length !== 3) {
+	// 	throw new Error('Three product images are required.')
+	// }
+	if (!Array.isArray(imageUrls)) {
+    	throw new Error('Image URLs must be an array.')
 	}
 
 	const duplicateQuery = query(productsRef, where('productId', '==', nextProductId))
