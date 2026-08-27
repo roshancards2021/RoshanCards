@@ -3356,7 +3356,8 @@ a {
 .single-product-state--error {
 	border-color: rgba(255, 126, 126, 0.28);
 	background: rgba(255, 126, 126, 0.1);
-	color: #ffffff;
+	color: #000000;
+	font-weight: 800;
 }
 
 .single-product-back-link,

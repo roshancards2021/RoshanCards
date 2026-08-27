@@ -68,7 +68,7 @@ ${payload.message}`;
         <section className="contact" aria-labelledby="contact-heading">
             <span style={{position:"relative",top:"-8rem"}} id="contact"></span>
             <div style={{fontFamily:'fangsong'}} className="contact-container">
-                <div style={{fontFamily:'fangsong !important'}} className="contact-info">
+                <div className="contact-info">
                     <h1 id="contact-heading" style={{color:'#ff3d8d'}}>Contact us</h1>
                     <ul className="contact-list">Have a question or want to work together? Reach out using the form or the contact details.</ul>
                     <ul className="contact-list">
