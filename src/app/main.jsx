@@ -17,6 +17,7 @@ import SingleProduct from '../pages/SingleProduct.jsx'
 import AboutUs from '../components/AboutUs.jsx'
 import ProtectedRoute from "../components/ProtectedRoute";
 import { HelmetProvider } from 'react-helmet-async'
+import FileNotFound from '../pages/FileNotFound.jsx'
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
   {
     path: "/product/:productId",
     element: <SingleProduct />
+  },
+  {
+    path: "*",
+    element: <FileNotFound />
   }
 ]);
 
