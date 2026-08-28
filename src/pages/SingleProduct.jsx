@@ -121,16 +121,14 @@ function SingleProduct() {
 
     const handleShare = async () => {
       try {
-        const shareId = product.productId || product._id;
-        const shareUrl = `${window.location.origin}/api/og/product/${shareId}`;
         if (navigator.share) {
             await navigator.share({
                 title: product.name,
                 text: product.name,
-                url: shareUrl
+                url: window.location.href,
             })
         } else {
-            await navigator.clipboard.writeText(shareUrl)
+            await navigator.clipboard.writeText(window.location.href)
             alert('Product link copied!')
         }
       } catch (err) {
