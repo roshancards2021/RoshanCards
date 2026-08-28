@@ -38,6 +38,12 @@ function SingleProduct() {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }, [])
+    
+    useEffect(() => {
+        if (product?.name) {
+            document.title = `${product.name} | RoshanCards`;
+        }
+    }, [product]);
 
     useEffect(() => {
         if (productFromState) return
@@ -113,6 +119,25 @@ function SingleProduct() {
         setIsFullscreen((current) => !current)
     }
 
+    const handleShare = async () => {
+      try {
+        const shareId = product.productId || product._id;
+        const shareUrl = `${window.location.origin}/api/og/product/${shareId}`;
+        if (navigator.share) {
+            await navigator.share({
+                title: product.name,
+                text: product.name,
+                url: shareUrl
+            })
+        } else {
+            await navigator.clipboard.writeText(shareUrl)
+            alert('Product link copied!')
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     if (isLoading) {
         return (
             <main className="single-product-page">
@@ -141,7 +166,8 @@ function SingleProduct() {
 
     return (
         <>
-        <title>Card, Calendar, Bag Design | RoshanCards</title>
+        {/* <title> Product Details | RoshanCards</title> */}
+        
             <main className="single-product-page">
                 <div className="single-product-topbar">
                     <Link to="/catalogue" className="single-product-back-button" aria-label="Back to catalogue">
@@ -243,6 +269,7 @@ function SingleProduct() {
                                 <span className="single-product-details__label">Price</span>
                                 <span className="single-product-details__price">{currencyFormatter.format(product.price)}</span>
                             </div>
+                            <button type="button" className="single-product-share-button" onClick={handleShare}>Share Product</button>
                         </div>
 
                         <div className="single-product-details__grid">

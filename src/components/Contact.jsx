@@ -76,17 +76,17 @@ ${payload.message}`;
                             <li>Loading contact details…</li>
                         ) : contactInfo ? (
                             <>
-                                <li>Call☎️: <a href={`tel:${contactInfo.mobileNumber}`}>{contactInfo.mobileNumber}</a></li>
-                                <li>Mail✉️: <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></li>
-                                <li>Visit📍: <div style={{display: 'inline', whiteSpace: 'pre-wrap'}}>{contactInfo.address}</div></li>
+                                <li>Call☎️: <a style={{color:'black'}} href={`tel:${contactInfo.mobileNumber}`}>{contactInfo.mobileNumber}</a></li>
+                                <li>Mail✉️: <a style={{color:'black'}} href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></li>
+                                <li>Address📍: <div style={{display: 'inline', whiteSpace: 'pre-wrap'}}>{contactInfo.address}</div></li>
                             </>
                         ) : (
                             <li>No contact details available.</li>
                         )}
                     </ul>
-                    <ul className="contact-list">
+                    {/* <ul className="contact-list">
                         After Your Request is Submitted or your order has been processed and shipped, We Will Contact You shortly for the Smooth workflow.
-                    </ul>
+                    </ul> */}
                 </div>
 
                 <form className="contact-form" onSubmit={handleSubmit}>

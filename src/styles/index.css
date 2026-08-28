@@ -3175,6 +3175,8 @@ a {
 /* Contact & Footer styles */
 .contact {
 	padding: 3.5rem 1.5rem;
+	color: var(--text-secondary);
+	font-weight: bold;
 	background: #ffffff;
 }
 .contact-container{
@@ -3191,7 +3193,7 @@ a {
 	margin-bottom: 1rem;
 }
 .muted{ color: var(--text-secondary); margin-bottom: 1rem }
-.contact-list{ list-style: none; color:black;font-weight: bold; margin-top: .5rem;background: rgba(29, 34, 65, 0.082);backdrop-filter: blur(8px) saturate(160%);-webkit-backdrop-filter: blur(18px) saturate(160%);box-shadow: 0 16px 38px rgba(15, 23, 42, 0.12);border-radius:15px;padding: 1.5rem 3rem;font-family:'Couier';letter-spacing:0.05em;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(103,211,194,0.2) }
+.contact-list{ list-style: none; margin-top: .5rem; background-color: #79797925;backdrop-filter: blur(8px) saturate(160%);-webkit-backdrop-filter: blur(18px) saturate(160%);box-shadow: 0 16px 38px rgba(15, 23, 42, 0.12);border-radius:15px;padding: 1.5rem 3rem;font-family:'Couier';letter-spacing:0.05em;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(103,211,194,0.2) }
 .contact-list li{ margin: .45rem 0 }
 .contact-form label{ display:block; margin-bottom: .8rem }
 .contact-form .label{ display:block; font-size:.85rem; margin-bottom:.35rem; color:var(--text-secondary) }
@@ -3598,6 +3600,21 @@ a {
 	align-items: flex-start;
 	padding-bottom: 0.9rem;
 	border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.single-product-share-button {
+    margin-top: 12px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.single-product-share-button:hover {
+    transform:scale(1.2);
+	transition: all 0.2s ease-in-out;
 }
 
 .single-product-details__title-group {

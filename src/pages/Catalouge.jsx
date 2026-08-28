@@ -310,7 +310,7 @@ function Catalouge() {
 
                                         <div className="catalogue-card__body">
                                             <div className="catalogue-card__info">
-                                                    <h4 className="catalogue-card__id">Id: {product.productId}</h4>
+                                                    {/* <h4 className="catalogue-card__id">Id: {product.productId}</h4> */}
                                                     <h4 className="catalogue-card__id">Cat: {product.category || 'Uncategorized'}</h4>
                                                 
 
@@ -322,7 +322,7 @@ function Catalouge() {
                                                     {product.status === 'in-stock' ? 'In Stock' : product.status === 'coming-soon' ? 'Processing' : 'Out of Stock'}
                                                 </strong>
                                             </div>
-                                                <h4 className="catalogue-card__id">{currencyFormatter.format(product.price)}</h4>
+                                                <h4 style={{color:'#00aeff',fontSize:'1.5rem'}} className="catalogue-card__id">{currencyFormatter.format(product.price)}</h4>
                                                 
                                                 <h4 className="catalogue-card__id">{(() => {
                                                     const h = product.height
