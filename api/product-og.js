@@ -38,7 +38,6 @@ export default async function handler(req, res) {
   <meta name="twitter:title" content="${escapeHtml(title)}" />
   <meta name="twitter:description" content="${escapeHtml(description)}" />
   <meta name="twitter:image" content="${escapeHtml(image)}" />
-  <meta http-equiv="refresh" content="0; url=${pageUrl}" />
 </head>
 <body>
   <h1>${escapeHtml(title)}</h1>
