@@ -41,7 +41,9 @@ export default async function handler(req, res) {
   <meta http-equiv="refresh" content="0; url=${pageUrl}" />
 </head>
 <body>
-  <p>Redirecting to <a href="${pageUrl}">${escapeHtml(title)}</a>...</p>
+  <h1>${escapeHtml(title)}</h1>
+  <p>${escapeHtml(description)}</p>
+  <a href="${pageUrl}">View product</a>
 </body>
 </html>`)
 }
