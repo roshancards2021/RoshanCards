@@ -267,7 +267,7 @@ function SingleProduct() {
                                 <span className="single-product-details__label">Price</span>
                                 <span className="single-product-details__price">{currencyFormatter.format(product.price)}</span>
                             </div>
-                            <button type="button" className="single-product-share-button" onClick={handleShare}>Share Product</button>
+                            <button type="button" className="single-product-share-button" title="Click to Share" onClick={handleShare}><span>Share Product </span><img src="/assets/Icon-Share.png" alt="Share Icon" /></button>
                         </div>
 
                         <div className="single-product-details__grid">

@@ -3605,11 +3605,17 @@ a {
 .single-product-share-button {
     margin-top: 12px;
     padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
+	color: #ff3d8d;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.single-product-share-button span{
+	position:relative;
+	top:-8px;
 }
 
 .single-product-share-button:hover {
