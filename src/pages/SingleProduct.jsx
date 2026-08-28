@@ -127,7 +127,7 @@ function SingleProduct() {
             await navigator.share({
                 title: product.name,
                 text: product.name,
-                url: shareUrl
+                url: window.location.href,
             })
         } else {
             await navigator.clipboard.writeText(shareUrl)
