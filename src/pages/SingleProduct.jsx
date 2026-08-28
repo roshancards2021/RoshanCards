@@ -121,8 +121,6 @@ function SingleProduct() {
 
     const handleShare = async () => {
       try {
-        const shareId = product.productId || product._id;
-        const shareUrl = `${window.location.origin}/api/og/product/${shareId}`;
         if (navigator.share) {
             await navigator.share({
                 title: product.name,
@@ -130,7 +128,7 @@ function SingleProduct() {
                 url: window.location.href,
             })
         } else {
-            await navigator.clipboard.writeText(shareUrl)
+            await navigator.clipboard.writeText(window.location.href);
             alert('Product link copied!')
         }
       } catch (err) {
@@ -163,9 +161,15 @@ function SingleProduct() {
             </main>
         )
     }
-
+    const pageUrl = window.location.href;
+    const image = product.image || product.images?.[0];
     return (
         <>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${product.name}`} />
+        <meta property="og:description" content={`${product.description || product.name}`} />
+        <meta property="og:image" content={`${image}`} />
+        <meta property="og:url" content={`${pageUrl}`} />
         {/* <title> Product Details | RoshanCards</title> */}
         
             <main className="single-product-page">
