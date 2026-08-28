@@ -16,10 +16,8 @@ export default async function handler(req, res) {
   }
 
   const pageUrl = `https://www.roshancards.com/product/${id}`
-  const title = product ? `${product.name} | RoshanCards` : 'RoshanCards'
-  const description = product?.description
-    ? product.description.slice(0, 200)
-    : 'Premium Readymade & Customized invitation cards, calendars and diaries.'
+  const title = product ? `${product.name} | RoshanCards` : 'DEBUG: PRODUCT NOT FOUND'
+  const description = product ? product.description.slice(0, 200) : 'DEBUG: fetch or lookup failed'
   const image = product?.imageUrls?.[0] || 'https://www.roshancards.com/logo.png'
 
   res.setHeader('Content-Type', 'text/html')
