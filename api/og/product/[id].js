@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const { productId } = req.query;
+  const { id } = req.query;
 
   try {
     const apiUrl = process.env.VITE_API_URL;
@@ -7,11 +7,12 @@ export default async function handler(req, res) {
     const response = await fetch(
       `${apiUrl}/products`
     );
+    if (!response.ok) {throw new Error(`API returned ${response.status}`);}
 
     const products = await response.json();
 
     const product = products.find(
-      (p) => String(p.productId) === productId || p._id === productId
+      (p) => String(p.productId) === id || p._id === id
     );
 
     if (!product) {
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
         : `${apiUrl}${firstImage}`;
 
     const pageUrl =
-      `https://roshancards.com/product/${productId}`;
+      `https://roshancards.com/product/${id}`;
 
     const html = `
 <!DOCTYPE html>
