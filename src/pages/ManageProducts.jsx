@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import apiBaseUrl from '../data/api'
@@ -51,7 +51,8 @@ function ManageProducts() {
     const [deletingProductId, setDeletingProductId] = useState('')
     const [statusMessage, setStatusMessage] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
-
+    const productNameInputRef = useRef(null);
+    
     const selectedProduct = useMemo(() => {
         return products.find((product) => product._id === selectedProductId) || null
     }, [products, selectedProductId])
@@ -158,6 +159,9 @@ function ManageProducts() {
         })
         setStatusMessage(`Editing ${product.name}.`)
         setErrorMessage('')
+        setTimeout(() => {
+    productNameInputRef.current?.scrollIntoView({behavior: 'smooth',block: 'center',})
+    productNameInputRef.current?.focus()}, 0)
     }
 
     const resetEditor = () => {
@@ -322,7 +326,7 @@ function ManageProducts() {
 
                         <label className="manage-products-field manage-products-field--wide">
                             <span>Product name</span>
-                            <input name="name" value={formData.name} onChange={handleChange} placeholder="Premium Display Card" required />
+                            <input ref={productNameInputRef} name="name" value={formData.name} onChange={handleChange} placeholder="Premium Display Card" required />
                         </label>
 
                         <label className="manage-products-field manage-products-field--wide">
