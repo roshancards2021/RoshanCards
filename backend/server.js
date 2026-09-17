@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import multer from 'multer';
 import path from 'path';
+import { generateBlurHash } from './utils/generateBlurHash.js';
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from './firebase.js';
 import { createContactRequest, createProduct, createSliderContent, createUser, deleteContactRequestById, deleteProductById, deleteSliderContentById, deleteUserById, findUserByCredentials, getAllContactRequests, getAllProducts, getAllSliderContent, getAllUsers, getContactInfo, getProductById, updateProductById, updateSliderContentById, upsertContactInfo } from './db.js';
@@ -15,13 +16,24 @@ function getStorageFileName(file) {
 
 async function uploadFileToFirebaseStorage(file) {
     const fileName = getStorageFileName(file);
+
     const fileRef = ref(storage, fileName);
+
+    const blurHash = await generateBlurHash(
+        file.buffer
+    );
+
     await uploadBytes(fileRef, file.buffer, {
         contentType: file.mimetype,
     });
 
     const url = await getDownloadURL(fileRef);
-    return { filePath: fileName, url };
+
+    return {
+        filePath: fileName,
+        url,
+        blurHash,
+    };
 }
 
 function getStoragePathFromUrl(url) {
@@ -270,7 +282,10 @@ app.post('/products', upload.fields([
         }
         
         const imageUrls = uploadedImages.map(
-            (item) => item.url
+            (item) =>({
+                url: item.url,
+                blurHash: item.blurHash,
+            })
         );
 
         const product = await createProduct({
@@ -337,10 +352,17 @@ app.put('/products/:id', upload.fields([
             uploadedImages.push(uploaded);
         
             if (imageUrls[0]) {
-                await deleteImageByUrl(imageUrls[0]);
+                await deleteImageByUrl(
+                    typeof imageUrls[0] === 'string'
+                        ? imageUrls[0]
+                        : imageUrls[0]?.url
+                );
             }
         
-            imageUrls[0] = uploaded.url;
+            imageUrls[0] = { 
+                url:uploaded.url,
+                blurHash: uploaded.blurHash,
+            };
         }
         
         if (imageTwo) {
@@ -348,10 +370,17 @@ app.put('/products/:id', upload.fields([
             uploadedImages.push(uploaded);
         
             if (imageUrls[1]) {
-                await deleteImageByUrl(imageUrls[1]);
+                await deleteImageByUrl(
+                    typeof imageUrls[1] === 'string'
+                        ? imageUrls[1]
+                        : imageUrls[1]?.url
+                );
             }
         
-            imageUrls[1] = uploaded.url;
+            imageUrls[1] = {
+                url: uploaded.url,
+                blurHash: uploaded.blurHash,
+            };
         }
         
         if (imageThree) {
@@ -359,10 +388,17 @@ app.put('/products/:id', upload.fields([
             uploadedImages.push(uploaded);
         
             if (imageUrls[2]) {
-                await deleteImageByUrl(imageUrls[2]);
+                await deleteImageByUrl(
+                    typeof imageUrls[2] === 'string'
+                        ? imageUrls[2]
+                        : imageUrls[2]?.url
+                );
             }
         
-            imageUrls[2] = uploaded.url;
+            imageUrls[2] = {
+                url: uploaded.url,
+                blurHash: uploaded.blurHash,
+            };
         }
 
         const product = await updateProductById(req.params.id, {
@@ -402,7 +438,15 @@ app.delete('/products/:id', async (req, res) => {
             return res.status(404).json({ error: 'Product not found.' });
         }
 
-        await Promise.allSettled((existingProduct.imageUrls || []).map((imageUrl) => deleteImageByUrl(imageUrl)));
+        await Promise.allSettled(
+            (existingProduct.imageUrls || []).map((image) =>
+                deleteImageByUrl(
+                    typeof image === 'string'
+                        ? image
+                        : image?.url
+                )
+            )
+        );
 
         res.json({ success: true });
     } catch (err) {

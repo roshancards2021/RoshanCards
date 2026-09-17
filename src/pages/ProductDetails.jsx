@@ -126,9 +126,9 @@ function ProductDetails() {
                         </div>
 
                         {sortedProducts.map((product) => {
-                            const firstImage = resolveProductImageUrl(product.imageUrls?.[0])
-                            const secondImage = resolveProductImageUrl(product.imageUrls?.[1])
-                            const thirdImage = resolveProductImageUrl(product.imageUrls?.[2])
+                            const firstImage = resolveProductImageUrl(typeof product.imageUrls?.[0] === 'string' ? product.imageUrls?.[0] : product.imageUrls?.[0]?.url)
+                            const secondImage = resolveProductImageUrl(typeof product.imageUrls?.[1] === 'string' ? product.imageUrls?.[1] : product.imageUrls?.[1]?.url)
+                            const thirdImage = resolveProductImageUrl(typeof product.imageUrls?.[2] === 'string' ? product.imageUrls?.[2] : product.imageUrls?.[2]?.url)
 
                             return (
                                 <div key={product._id} className="product-details-table__row" role="row">

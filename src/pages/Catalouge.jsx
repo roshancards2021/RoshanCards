@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import apiBaseUrl from '../data/api'
 import { Helmet } from 'react-helmet-async'
+import BlurImage from '../components/BlurImage'
 
 const currencyFormatter = new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -11,12 +12,25 @@ const currencyFormatter = new Intl.NumberFormat('en-IN', {
     maximumFractionDigits: 2,
 })
 
-const resolveProductImageUrl = (imageUrl) => {
+const resolveProductImageUrl = (image) => {
+    if (!image) {
+        return null
+    }
+
+    const imageUrl =
+        typeof image === 'string'
+            ? image
+            : image?.url
+
     if (!imageUrl) {
         return null
     }
 
-    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('blob:')) {
+    if (
+        imageUrl.startsWith('http://') ||
+        imageUrl.startsWith('https://') ||
+        imageUrl.startsWith('blob:')
+    ) {
         return imageUrl
     }
 
@@ -25,7 +39,11 @@ const resolveProductImageUrl = (imageUrl) => {
 
 const tokenize = (value) => value.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
 
-function LazyCatalogueImage({ src, alt }) {
+function LazyCatalogueImage({
+    src,
+    blurHash,
+    alt,
+}) {
     const imageWrapRef = useRef(null)
     const [isInView, setIsInView] = useState(false)
 
@@ -50,15 +68,28 @@ function LazyCatalogueImage({ src, alt }) {
     }, [src, isInView])
 
     return (
-        <div className="catalogue-card__image-wrap" ref={imageWrapRef}>
+        <div
+            className="catalogue-card__image-wrap"
+            ref={imageWrapRef}
+        >
             {src ? (
                 isInView ? (
-                    <img className="catalogue-card__image" src={src} alt={alt} loading="lazy" />
+                    <BlurImage
+                        src={src}
+                        blurHash={blurHash}
+                        alt={alt}
+                        className="catalogue-card__image"
+                    />
                 ) : (
-                    <div className="catalogue-card__image" aria-hidden="true" />
+                    <div
+                        className="catalogue-card__image"
+                        aria-hidden="true"
+                    />
                 )
             ) : (
-                <div className="catalogue-card__image catalogue-card__image--empty">No image</div>
+                <div className="catalogue-card__image catalogue-card__image--empty">
+                    No image
+                </div>
             )}
         </div>
     )
@@ -293,7 +324,12 @@ function Catalouge() {
                 ) : filteredProducts.length > 0 ? (
                     <section className="catalogue-grid" aria-label="Product catalogue grid">
                         {filteredProducts.map((product) => {
-                            const firstImage = resolveProductImageUrl(product.imageUrls?.[0])
+                            const firstImageData = product.imageUrls?.[0]
+                            const firstImage = resolveProductImageUrl(firstImageData)
+                            const firstImageBlurHash =
+                                typeof firstImageData === 'string'
+                                    ? null
+                                    : firstImageData?.blurHash
 
                             return (
                                 <Link
@@ -305,7 +341,7 @@ function Catalouge() {
                                 >
                                     <article className="catalogue-card">
                                         <div className="catalogue-image-wrap">
-                                            <LazyCatalogueImage src={firstImage} alt={product.name} />
+                                            <LazyCatalogueImage src={firstImage} blurHash={firstImageBlurHash} alt={product.name} />
                                         </div>
 
                                         <div className="catalogue-card__body">

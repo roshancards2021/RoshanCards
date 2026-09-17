@@ -153,9 +153,9 @@ function ManageProducts() {
         })
         setImageFiles(createEmptyImageState())
         setPreviewUrls({
-            first: resolveProductImageUrl(product.imageUrls?.[0]),
-            second: resolveProductImageUrl(product.imageUrls?.[1]),
-            third: resolveProductImageUrl(product.imageUrls?.[2]),
+            first: resolveProductImageUrl(typeof product.imageUrls?.[0] === 'string' ? product.imageUrls?.[0] : product.imageUrls?.[0]?.url),
+            second: resolveProductImageUrl(typeof product.imageUrls?.[1] === 'string' ? product.imageUrls?.[1] : product.imageUrls?.[1]?.url),
+            third: resolveProductImageUrl(typeof product.imageUrls?.[2] === 'string' ? product.imageUrls?.[2] : product.imageUrls?.[2]?.url),
         })
         setStatusMessage(`Editing ${product.name}.`)
         setErrorMessage('')

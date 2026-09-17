@@ -3433,11 +3433,11 @@ a {
 .single-product-image-section {
 	position: relative;
 	left: 20%;
-	top: 5%;
+	top: 0%;
 	display: grid;
 	width: min(30vw, 48rem);
 	max-width: 100%;
-	height: 71vh;
+	height: 80vh;
 	gap: 0.9rem;
 	padding: 1rem;
 	border: 1px solid rgba(15, 23, 42, 0.12);
@@ -3446,7 +3446,7 @@ a {
 	box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
 }
 
-.single-product-image-wrap {
+/* .single-product-image-wrap {
 	position: relative;
 	aspect-ratio: auto;
 	min-height: 0;
@@ -3454,23 +3454,48 @@ a {
 	width: min(30vw, 100%);
 	height: min(70vh, calc(100vh - 13rem));
 	max-height: 70vh;
-	/* overflow: hidden; */
-	/* border: 1px solid rgba(15, 23, 42, 0.08); */
 	background: rgba(255, 255, 255, 0);
 	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
 	cursor: crosshair;
 	user-select: none;
+} */
+
+.single-product-image-wrap {
+    position: relative;
+    aspect-ratio: auto;
+    min-height: 0;
+    border-radius: 0;
+
+    width: min(42vw, 100%);
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.single-product-image {
+/* .single-product-image {
 	display: block;
 	width: 100%;
 	height: 100%;
 	border-radius: 12px;
 	object-fit: contain;
-	object-position: center;
 	background: #ffffff;
 	transition: opacity 180ms ease;
+} */
+
+.single-product-image {
+    display: block;
+
+    width: auto;
+    max-width: 100%;
+
+    height: auto;
+    max-height: 75vh;
+
+    border-radius: 12px;
+    object-fit: contain;
+    object-position: center;
 }
 
 .single-product-image--empty {
@@ -4115,10 +4140,6 @@ video {
 	top: 55%;
   }
   .single-product-image-section {
-    left: 8%;
-    top: 0;
-    width: min(40vw, 42rem);
-    max-width: 100%;
     height: auto;
   }
 
@@ -4424,7 +4445,7 @@ video {
     left: 20%;
   }
   .single-product-image{
-    width: 150% !important;
+    width: 100% !important;
   }
   .single-product-image-wrap{
     height: 100%;
@@ -4898,9 +4919,6 @@ video {
     margin: 0.45rem 0 0.65rem;
     flex-wrap: wrap;
   }
-  .single-product-image{
-	height: 50vh;
-  }
   .single-product-image-section {
     width: 100%;
 	height: 88%;
@@ -5032,11 +5050,8 @@ video {
   .single-product-details{
     top: -10%;
   }
-  .single-product-image{
-	height: 40vh;
-  }
   .single-product-image-section{
-	height: 71%;
+	height: 75%;
   }
   .single-product-arrows{
     width: 140%;
@@ -5123,10 +5138,6 @@ video {
   .single-product-arrows{
 	width: 140%;
 	left: -20%;
-  }
-  .single-product-image{
-	height: 42vh;
-
   }
   .single-product-image-wrap{
 	height: fit-content !important;

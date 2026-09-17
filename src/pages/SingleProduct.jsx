@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import apiBaseUrl from '../data/api'
+import BlurImage from '../components/BlurImage'
 
 const currencyFormatter = new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -84,7 +85,19 @@ function SingleProduct() {
     }, [productId, productFromState])
 
     const imageUrls = product?.imageUrls || []
-    const currentImageUrl = imageUrls[activeImageIndex] ? resolveProductImageUrl(imageUrls[activeImageIndex]) : null
+
+    const currentImage = imageUrls[activeImageIndex]
+
+    const currentImageUrl =
+        currentImage
+            ? resolveProductImageUrl(
+                  typeof currentImage === 'string'
+                      ? currentImage
+                      : currentImage.url
+              )
+            : null
+
+    const currentImageBlurHash = typeof currentImage === 'string' ? null : currentImage?.blurHash
 
     const goToPrevImage = useCallback(() => {
         setActiveImageIndex((current) => (current === 0 ? imageUrls.length - 1 : current - 1))
@@ -189,11 +202,11 @@ function SingleProduct() {
                             onClick={toggleFullscreen}
                         >
                             {currentImageUrl ? (
-                                <img
+                                <BlurImage
                                     className="single-product-image"
                                     src={currentImageUrl}
+                                    blurHash={currentImageBlurHash}
                                     alt={`${product.name} — image ${activeImageIndex + 1}`}
-                                    draggable={false}
                                 />
                             ) : (
                                 <div className="single-product-image single-product-image--empty">No image</div>
@@ -233,8 +246,18 @@ function SingleProduct() {
                         {/* Thumbnails */}
                         {imageUrls.length > 1 && (
                             <div className="single-product-thumbnails">
-                                {imageUrls.map((url, index) => {
-                                    const resolved = resolveProductImageUrl(url)
+                                {imageUrls.map((image, index) => {
+                                    const resolved =
+                                        resolveProductImageUrl(
+                                            typeof image === 'string'
+                                                ? image
+                                                : image.url
+                                        )
+                                    
+                                    const blurHash =
+                                        typeof image === 'string'
+                                            ? null
+                                            : image?.blurHash
                                     return (
                                         <button
                                             key={index}
@@ -244,7 +267,7 @@ function SingleProduct() {
                                             aria-label={`View image ${index + 1}`}
                                         >
                                             {resolved ? (
-                                                <img src={resolved} alt={`${product.name} thumbnail ${index + 1}`} loading="lazy" />
+                                                <BlurImage src={resolved} blurHash={blurHash} alt={`${product.name} thumbnail ${index + 1}`} loading="lazy" />
                                             ) : (
                                                 <span>?</span>
                                             )}
