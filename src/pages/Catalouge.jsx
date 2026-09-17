@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import apiBaseUrl from '../data/api'
@@ -104,11 +104,19 @@ function Catalouge() {
     const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false)
     const [categorySearchQuery, setCategorySearchQuery] = useState('')
     const [isMobileView, setIsMobileView] = useState(() => window.innerWidth <= 768)
+    const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }, [])
+    useEffect(() => {
+        const category =
+            searchParams.get('category')
 
+        if (category) {
+            setSelectedCategory(category)
+        }
+    }, [])
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'Escape') {
@@ -246,6 +254,56 @@ function Catalouge() {
     }, [products, searchQuery, selectedCategory])
 
     const activeCategoryLabel = selectedCategory === 'all' ? 'All Categories' : selectedCategory
+    const handleCategorySelect =
+    (category) => {
+
+        setSelectedCategory(category)
+
+        if (
+            category === 'All' ||
+            category === 'All Categories'
+        ) {
+            setSearchParams({})
+        } else {
+            setSearchParams({
+                category
+            })
+        }
+    }
+
+    const handleShareCategory =
+    async () => {
+
+        const shareUrl =
+            window.location.href
+
+        try {
+
+            if (
+                navigator.share
+            ) {
+
+                await navigator.share({
+                    title:
+                        'RoshanCards Catalogue | Category: '+activeCategoryLabel,
+                    url: shareUrl
+                })
+
+            } else {
+
+                await navigator.clipboard.writeText(
+                    shareUrl
+                )
+
+                alert(
+                    'Link copied to clipboard'
+                )
+            }
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <>
@@ -279,7 +337,7 @@ function Catalouge() {
                                     </label>
                                 ) : null}
 
-                                <button type="button" className="catalogue-category-menu__item" onClick={() => { setSelectedCategory('all'); setIsCategoryMenuOpen(false) }}>
+                                <button type="button" className="catalogue-category-menu__item" onClick={() => { handleCategorySelect('all'); setIsCategoryMenuOpen(false) }}>
                                     All Categories
                                 </button>
 
@@ -288,7 +346,7 @@ function Catalouge() {
                                         key={category}
                                         type="button"
                                         className={`catalogue-category-menu__item${selectedCategory === category ? ' is-active' : ''}`}
-                                        onClick={() => { setSelectedCategory(category); setIsCategoryMenuOpen(false) }}
+                                        onClick={() => { handleCategorySelect(category); setIsCategoryMenuOpen(false) }}
                                     >
                                         {category}
                                     </button>
@@ -384,6 +442,13 @@ function Catalouge() {
                 ) : (
                     <p className="catalogue-state">No matching products found.</p>
                 )}
+                <button
+                    className="catalogue-share-button"
+                    onClick={handleShareCategory}
+                    aria-label="Share catalogue"
+                >
+                    🔗
+                </button>
             </main>
             <Helmet>
                 <title>RoshanCards | Catalogue Page readymade & customized Invitations, Calendars, Diaries.</title>
