@@ -447,7 +447,7 @@ function Catalouge() {
                     onClick={handleShareCategory}
                     aria-label="Share catalogue"
                 >
-                    🔗
+                    <img src="/assets/Icon-Share.png" alt="Share Icon" />
                 </button>
             </main>
             <Helmet>

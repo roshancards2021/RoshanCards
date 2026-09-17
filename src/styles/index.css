@@ -5624,36 +5624,22 @@ video {
 }
 
 .catalogue-share-button {
-
     position: fixed;
-
     right: 24px;
     bottom: 24px;
-
     width: 58px;
     height: 58px;
-
-    border: none;
     border-radius: 50%;
-
     cursor: pointer;
-
     font-size: 1.5rem;
-
     z-index: 999;
-
-    background: #111827;
+    background: #ffffff4d;
+	border: 1px solid #ff3d8d;
     color: white;
-
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,.25);
-
-    transition:
-        transform .2s ease;
+    box-shadow:0 0px 30px rgba(0,0,0,.5);
+    transition:transform .2s ease;
 }
 
 .catalogue-share-button:hover {
-    transform:
-        translateY(-2px);
+    transform:translateY(-2px);
 }
