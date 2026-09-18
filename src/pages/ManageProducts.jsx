@@ -315,7 +315,7 @@ function ManageProducts() {
                     </div>
 
                     <div className="manage-products-form__notice">
-                        Update any field below. If you want to replace the product images, upload both new files together.
+                        Select a Product from the List then Update any field below. Click update after making changes.
                     </div>
 
                     <div className="manage-products-fields">
@@ -418,7 +418,7 @@ function ManageProducts() {
                     </div>
                 </form>
 
-                <div className="manage-products-panel manage-products-panel--table">
+                <div style={{height:'280vh',overflowY:'scroll'}} className="manage-products-panel manage-products-panel--table">
                     <div className="manage-products-panel__heading manage-products-panel__heading--split">
                         <div>
                             <p className="manage-products-panel__eyebrow">Catalog</p>
